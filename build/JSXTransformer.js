@@ -239,7 +239,7 @@
                 xhr = window.ActiveXObject ? new window.ActiveXObject('Microsoft.XMLHTTP')
                     : new XMLHttpRequest();
 
-                // async, however scripts will be executed in the order they are in the
+                // async, however js will be executed in the order they are in the
                 // DOM to mirror normal script loading.
                 xhr.open('GET', url, true);
                 if ('overrideMimeType' in xhr) {
@@ -260,7 +260,7 @@
 
             /**
              * Loop over provided script tags and get the content, via innerHTML if an
-             * inline script, or by using XHR. Transforms are applied if needed. The scripts
+             * inline script, or by using XHR. Transforms are applied if needed. The js
              * are executed in the order they are found on the page.
              *
              * @param {array} scripts The <script> elements to load and run.
@@ -364,7 +364,7 @@
             }
 
 // Listen for load event if we're in a browser and then kick off finding and
-// running of scripts.
+// running of js.
             if (typeof window !== 'undefined' && window !== null) {
                 headEl = document.getElementsByTagName('head')[0];
                 dummyAnchor = document.createElement('a');
