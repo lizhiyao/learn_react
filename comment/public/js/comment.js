@@ -3,10 +3,13 @@
  */
 
 // 原生 HTML 元素名以小写字母开头，而自定义的 React 类名以大写字母开头
-var data = [
-    { author: "Pete Hunt", text: "This is one comment" },
-    { author: "Jordan Walke", text: "This is *another* comment" }
-];
+
+// props 是不可变的：它们从父组件传递过来，“属于”父组件。
+// 为了实现交互，我们给组件引入了可变的 state 。
+// this.state 是组件私有的，可以通过调用 this.setState() 来改变它。当 state 更新之后，组件就会重新渲染自己。
+
+// render() 方法依赖于 this.props 和 this.state ，
+// 框架会确保渲染出来的 UI 界面总是与输入（ this.props 和 this.state ）保持一致。
 
 var Comment = React.createClass({
     rawMarkup: function() {
@@ -54,18 +57,23 @@ var CommentForm = React.createClass({
 });
 
 var CommentBox = React.createClass({
+    getInitialState: function() {
+        return {
+            data: []
+        }
+    },
     render: function() {
         return (
             <div className="commentBox">
                 <h1>Comments</h1>
-                <CommentList data={this.props.data} />
+                <CommentList data={this.state.data} />
                 <CommentForm />
             </div>
         );
     }
 });
 ReactDOM.render(
-    <CommentBox data={data} />,
+    <CommentBox url="/api/comments" />,
     document.getElementById('content')
 );
 
