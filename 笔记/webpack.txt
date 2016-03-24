@@ -1,0 +1,25 @@
+1.install node.js
+
+2.npm install webpack -g
+
+3.Use webpack in a project
+It’s the best to have webpack also as dependency in your project. 
+Through this you can choose a local webpack version and will not be forced to use the single global one.
+
+Add a package.json configuration file for npm with:
+ npm init
+ 
+Install and add webpack to the package.json with:
+npm install webpack --save-dev --registry=https://registry.npm.taobao.org
+npm install -g webpack-dev-server --save-dev --registry=https://registry.npm.taobao.org
+
+
+
+
+npm install --save react
+npm install --save react-dom
+
+npm install --save-dev babel-loader
+npm install --save-dev babel-core
+npm install --save-dev babel-preset-es2015
+npm install --save-dev babel-preset-react
