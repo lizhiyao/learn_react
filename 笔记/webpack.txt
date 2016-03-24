@@ -19,6 +19,8 @@ npm install -g webpack-dev-server --save-dev --registry=https://registry.npm.tao
 npm install --save react
 npm install --save react-dom
 
+
+
 npm install --save-dev babel-loader
 npm install --save-dev babel-core
 npm install --save-dev babel-preset-es2015
