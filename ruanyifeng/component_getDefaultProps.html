@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="build/react.js"></script>
+  <script src="build/react-dom.js"></script>
+  <script src="build/browser.js"></script>
+</head>
+
+<body>
+  <div id="example"></div>
+  
+  <!--组件的属性可以接受任意值，字符串、对象、函数等等都可以。
+  有时，我们需要一种机制，验证别人使用组件时，提供的参数是否符合要求。
+  组件类的PropTypes属性，就是用来验证组件实例的属性是否符合要求-->
+  
+  <!--PropTypes 告诉 React，这个 title 属性是必须的，而且它的值必须是字符串-->
+  <script type="text/babel">
+    var MyTitle = React.createClass({
+      getDefaultProps : function () {
+        return {
+          title : 'Hello World'
+        };
+      },
+
+
+      render: function() {
+        return <h1> {this.props.title} </h1>;
+      }
+    });
+    
+    var data = 123;
+
+    ReactDOM.render(
+      <MyTitle />,
+      document.getElementById("example")
+    );
+  </script>
+</body>
+
+</html>

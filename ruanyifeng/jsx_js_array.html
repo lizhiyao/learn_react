@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="build/react.js"></script>
+  <script src="build/react-dom.js"></script>
+  <script src="build/browser.js"></script>
+</head>
+
+<body>
+  <div id="example"></div>
+
+  <!--体现了 JSX 的基本语法规则：
+  遇到 HTML 标签（以 < 开头），就用 HTML 规则解析；
+  遇到代码块（以 { 开头），就用 JavaScript 规则解析。-->
+  <script type="text/babel">
+    var arr = [
+      <h1>Hello world!</h1>,
+      <h2>React is awesome</h2>,
+    ];
+  
+    ReactDOM.render(
+      <div>{arr}</div>,
+      document.getElementById('example')
+    );
+  </script>
+</body>
+
+</html>
