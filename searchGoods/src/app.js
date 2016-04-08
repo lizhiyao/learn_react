@@ -33,13 +33,20 @@ var ProductTable = React.createClass({
     render: function() {
         var rows = [];
         var lastCategory = null;
+
         this.props.products.forEach(function(product) {
+            // 用户在输入框中输入的商品名称与库存中商品名不匹配 或者 如果用户仅在有库存的商品中搜索但是该商品没有库存了
+            if (product.name.indexOf(this.props.filterText) === -1 ||
+                (this.props.inStockOnly && !product.stocked)) {
+                return;
+            }
+
             if (product.category !== lastCategory) {
                 rows.push(<ProductCategoryRow category={product.category} key={product.category} />);
             }
             rows.push(<ProductRow product={product} key={product.name} />);
             lastCategory = product.category;
-        });
+        }.bind(this));
         return (
             <table>
                 <thead>
@@ -55,14 +62,23 @@ var ProductTable = React.createClass({
 });
 
 var SearchBar = React.createClass({
+    handleChange: function() {
+        this.props.onUserInput(
+            this.refs.filterTextInput.value,
+            this.refs.inStockOnlyInput.checked
+        );
+    },
+
     render: function() {
         return (
             <form>
-                <input type="text" placeholder="Search..." />
+                <input type="text" placeholder="Search..." value={this.props.filterText}
+                    ref="filterTextInput" onChange={this.handleChange} />
                 <p>
-                    <input type="checkbox" />
+                    <input type="checkbox" checked={this.props.inStockOnly}
+                        ref="inStockOnlyInput" onChange={this.handleChange} />
                     {' '}
-                    Only show products in stock
+                    仅显示有库存的商品
                 </p>
             </form>
         );
@@ -70,11 +86,27 @@ var SearchBar = React.createClass({
 });
 
 var FilterableProductTable = React.createClass({
+    getInitialState: function() {
+        return {
+            filterText: '',
+            inStockOnly: false
+        };
+    },
+
+    handleUserInput: function(filterText, inStockOnly) {
+        this.setState({
+            filterText: filterText,
+            inStockOnly: inStockOnly
+        });
+    },
+
     render: function() {
         return (
             <div>
-                <SearchBar />
-                <ProductTable products={this.props.products} />
+                <SearchBar filterText={this.state.filterText} inStockOnly={this.state.inStockOnly}
+                    onUserInput={this.handleUserInput} />
+                <ProductTable products={this.props.products} filterText={this.state.filterText}
+                    inStockOnly={this.state.inStockOnly} />
             </div>
         );
     }
